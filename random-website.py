@@ -25,7 +25,7 @@ def open_random_website(minnum, maxnum):
             url = create_url(minnum, maxnum)
             print("try ", url)
             url_list.append(url)
-            res = requests.head(url)
+            res = requests.head(url, timeout = 3.5)
             res.raise_for_status()
             if res.status_code == 200:
                 webbrowser.open(res.url) # open the url
@@ -34,6 +34,6 @@ def open_random_website(minnum, maxnum):
         except:
             continue
 
-open_url = open_random_website(1, 60)
+open_url = open_random_website(4, 60)
 create_url_log(open_url[1])
 print("open ", open_url[0])
