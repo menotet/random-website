@@ -9,7 +9,6 @@ def create_url(minnum, maxnum):
     n = random.randint(minnum, maxnum) #select url length
     random_list = [random.choice(string.ascii_lowercase + string.digits) for n in range(n)]
     random_url = "http://" + "".join(random_list) + "." + random.choice(domain_list) # shape url
-    print(random_url)
     return random_url
 
 def open_random_website(minnum, maxnum):
@@ -18,8 +17,8 @@ def open_random_website(minnum, maxnum):
     while (not opened_url):
         try:          
             url = create_url(minnum, maxnum)
+            print("try ", url)
             res = requests.head(url)
-            print("connecting ", res.url)
             res.raise_for_status()
             if res.status_code == 200:
                 webbrowser.open(res.url) # open the url
