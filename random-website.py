@@ -7,6 +7,7 @@ from asset.domain_list import domain_list
 
 def create_url_log(url_list):
     with open("url_log.txt", "a") as f:
+        f.truncate(0)
         f.write(str(url_list))
         f.write("\n")
 
