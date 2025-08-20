@@ -5,7 +5,8 @@ import random
 import string
 import argparse
 
-from asset.app_domain_list import app_domain_list
+from app_domain_list import app_domain_list
+
 
 class Random_website():
     def __init__(self):
@@ -40,10 +41,19 @@ class Random_website():
                     return res.url, url_list
             except:
                 continue
+            
+# --- Cli main function. ---
 
-if __name__ == "main":
+if __name__ == "__main__":
+    # Arg parser
+    parser = argparse.ArgumentParser(description="Explore random website.")
+    parser.add_argument("--min", type=int, default=4, help="Minimum length of the URL. (default: 4)")
+    parser.add_argument("--max", type=int, default=15, help="Maximum length of the URL. (default: 15)")
+    parser.add_argument("-d", "--domain", type=str, default="app_domain_list", help="Domain list file. (default: app_domain_list)")
+    args = parser.parse_args()
+
     random_website = Random_website
     random_website.domain_list = app_domain_list
-    open_url = random_website.open_random_website(4, 60)
+    open_url = random_website.open_random_website(args.min, args.max)
     random_website.create_url_log(open_url[0])
     print("open ", open_url[0])
