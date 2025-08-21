@@ -1,3 +1,10 @@
+"""
+This module generate random url.
+ 
+Copyright (c) 2025 menotet
+Licensed under the MIT License
+"""
+
 import webbrowser
 from requests.exceptions import RequestException, ConnectionError, HTTPError, Timeout
 import requests
@@ -10,11 +17,11 @@ from app_domain_list import app_domain_list
 
 class Random_website():
     def __init__(self):
-        self.domain_list = [] # need domain list file
+        self.domain_list = [] # need domain list file.
     
     def create_url_log(self, url, min, max):
         with open("url_log.txt", "a") as f:
-            # overwrite
+            # overwrite.
             # f.truncate(0)
             f.write(str(url) + " ")
             f.write(str(min) + " ")
