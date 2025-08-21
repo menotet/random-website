@@ -10,12 +10,16 @@ from app_domain_list import app_domain_list
 
 class Random_website():
     def __init__(self):
-        self.domain_list # need domain list file
+        self.domain_list = [] # need domain list file
     
-    def create_url_log(self, url):
+    def create_url_log(self, url, min, max):
         with open("url_log.txt", "a") as f:
-            f.truncate(0)
-            f.write(str(url))
+            # overwrite
+            # f.truncate(0)
+            f.write(str(url) + " ")
+            f.write(str(min) + " ")
+            f.write("~ ")
+            f.write(str(max) + " ")
             f.write("\n")
 
     def create_url(self, minnum, maxnum):
@@ -52,8 +56,8 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--domain", type=str, default="app_domain_list", help="Domain list file. (default: app_domain_list)")
     args = parser.parse_args()
 
-    random_website = Random_website
+    random_website = Random_website()
     random_website.domain_list = app_domain_list
     open_url = random_website.open_random_website(args.min, args.max)
-    random_website.create_url_log(open_url[0])
+    random_website.create_url_log(open_url[0], args.min, args.max)
     print("open ", open_url[0])
